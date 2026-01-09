@@ -21,7 +21,6 @@
             <button onclick="convertCurrency()" type="button">
                 <img src="src/Convert.png" alt="Convert">
             </button><br>
-            <label for="ED">ED: </label>
             <input type="text" id="ED" name="ED" readonly><br>
         </form>
 
@@ -35,9 +34,9 @@
                     var ed = Math.abs((kc / 100) * rate);
                     
                     var formatted;
-                    if (ed >= 100) {
-                        formatted = (100 / ed) + "b";
-                    } else if (ed >= 10) {
+                    if (ed >= 1000) {
+                        formatted = (ed/1000).toFixed(2) + "B ED";
+                     } else if (ed >= 10) {
                         formatted = ed + "m";
                     } else {
                         formatted = ed;
