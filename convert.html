@@ -1,0 +1,64 @@
+<html>
+<head>
+    <link rel="stylesheet" href="convert.css">
+    <title>Currency Calculator</title>
+
+</head>
+
+<body>
+    <div>
+        <form>
+            <img id="ui" src="src/bconv.png" class="corner-img" alt="bconv">
+            <img id="char"src="src/arab.png" class="background-img" alt="background">
+            <label for="KC">KC: </label>
+            <input type="number" id="KC" name="KC" oninput="clearWarning(); 
+                document.getElementById('ui').src = 'src/bconv.png';
+                document.getElementById('char').src = 'src/arab.png';"><br>
+            <label for="Rate">Rate: </label>
+            <input type="number" id="RT" name="Rate" oninput="clearWarning(); 
+                document.getElementById('ui').src = 'src/bconv.png';
+                document.getElementById('char').src = 'src/arab.png';"><br>
+            <button onclick="convertCurrency()" type="button">
+                <img src="src/Convert.png" alt="Convert">
+            </button><br>
+            <label for="ED">ED: </label>
+            <input type="text" id="ED" name="ED" readonly><br>
+        </form>
+
+        <script>
+            //ED = (KC / 100) * Rate
+
+            function convertCurrency() {
+                var kc = parseFloat(document.getElementById("KC").value);
+                var rate = parseFloat(document.getElementById("RT").value);
+                if (!isNaN(kc) && !isNaN(rate)) {
+                    var ed = Math.abs((kc / 100) * rate);
+                    
+                    var formatted;
+                    if (ed >= 1000) {
+                        formatted = ed + "b";
+                    } else if (ed >= 10) {
+                        formatted = ed + "m";
+                    } else {
+                        formatted = ed;
+                    }
+                    
+                    document.getElementById("ED").value = formatted;
+                    document.getElementById("ui").src = "src/aconv.png";
+                    document.getElementById("char").src = "src/araa.png";
+                } else {
+                    document.getElementById("warning").innerHTML = "Please enter valid numbers for KC and Rate.";
+                }
+            }
+
+            function clearWarning() {
+                document.getElementById("warning").innerHTML = "";
+            }
+
+        </script>
+    </div>
+    <label ID="warning"></label>
+
+</body>
+
+</html>
